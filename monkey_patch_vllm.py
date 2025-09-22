@@ -809,7 +809,6 @@ def _process_chunk_dict_our(
 ) -> ChunkDictInputs:
     chunk_texts = parsed_content["chunk_texts"]
     chunk_sequence = parsed_content["chunk_sequence"]
-    chunk_recompute_flags = parsed_content["chunk_recompute_flags"]
     prompt = "".join(chunk_texts)
 
     inputs: ChunkDictInputs
@@ -824,6 +823,8 @@ def _process_chunk_dict_our(
 
     chunk_lens = [len(chunk) for chunk in chunk_token_ids]
     pad_token_id = self.get_pad_token_id(lora_request)
+
+    chunk_recompute_flags = parsed_content.get("chunk_recompute_flags", [[0]*len(ids) for ids in chunk_token_ids])
 
     padded_chunk_token_ids, padded_chunk_recompute_flags = self.pad_chunks(block_size, pad_token_id, chunk_token_ids, chunk_recompute_flags)
     padded_chunk_lens = [len(chunk) for chunk in padded_chunk_token_ids]

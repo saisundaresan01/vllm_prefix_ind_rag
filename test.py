@@ -94,29 +94,6 @@ def format_rag_prompt(rag_prompt, type='base'):
         chunk_sequence = [0] + [1 for _ in range(len(rag_prompt["documents"]))] + ([] if rag_prompt["question"] == "" else [2])
         return {"chunk_texts": chunk_texts, "chunk_sequence": chunk_sequence}
 
-def set_chunk_recompute_flags(prompt, tokenizer):
-    chunk_texts = prompt["chunk_texts"]
-    chunk_recompute_flags = []
-    for i, chunk_text in enumerate(chunk_texts):
-        if chunk_text not in CHUNK_RECOMPUTE_FLAGS:
-            num_tokens = len(tokenizer(chunk_text)['input_ids']) - 1
-            if i == 0:
-                num_tokens += 1
-            CHUNK_RECOMPUTE_FLAGS[chunk_text] = [0] * num_tokens
-        chunk_recompute_flags.append(CHUNK_RECOMPUTE_FLAGS[chunk_text])
-    prompt["chunk_recompute_flags"] = chunk_recompute_flags
-    return prompt
-
-
-def update_chunk_recompute_flags(chunk_texts, chunk_recompute_flags):
-    for i, chunk_text in enumerate(chunk_texts):
-        recompute_ratio = 0
-        recompute_tokens = int(len(chunk_recompute_flags[i]) * recompute_ratio)
-        CHUNK_RECOMPUTE_FLAGS[chunk_text] = (
-            [-1] * (len(chunk_recompute_flags[i]) - recompute_tokens) +
-            [1] * recompute_tokens
-        )
-
 tokenizer = AutoTokenizer.from_pretrained(model_path)
 
 # Prepare prompts
@@ -130,25 +107,11 @@ llm = LLM(model=model_path, max_num_batched_tokens=100000,
 
 
 outputs = []
-prompts[0] = set_chunk_recompute_flags(prompts[0], tokenizer)
 outputs.extend(llm.generate(prompts[0], sampling_params))
-update_chunk_recompute_flags(prompts[0]["chunk_texts"], prompts[0]["chunk_recompute_flags"])
-
-prompts[1] = set_chunk_recompute_flags(prompts[1], tokenizer)
 outputs.extend(llm.generate(prompts[1], sampling_params))
-update_chunk_recompute_flags(prompts[1]["chunk_texts"], prompts[1]["chunk_recompute_flags"])
-
-prompts[2] = set_chunk_recompute_flags(prompts[2], tokenizer)
 outputs.extend(llm.generate(prompts[2], sampling_params))
-update_chunk_recompute_flags(prompts[2]["chunk_texts"], prompts[2]["chunk_recompute_flags"])
-
-prompts[3] = set_chunk_recompute_flags(prompts[3], tokenizer)
 outputs.extend(llm.generate(prompts[3], sampling_params))
-update_chunk_recompute_flags(prompts[3]["chunk_texts"], prompts[3]["chunk_recompute_flags"])
-
-prompts[4] = set_chunk_recompute_flags(prompts[4], tokenizer)
 outputs.extend(llm.generate(prompts[4], sampling_params))
-update_chunk_recompute_flags(prompts[4]["chunk_texts"], prompts[4]["chunk_recompute_flags"])
 
 for output in outputs:
     print("----")
