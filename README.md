@@ -25,7 +25,7 @@ Compared to regular prefix caching, where changing prefixes/order often invalida
 
 ### Install
 ```bash
-pip install "vllm==0.10.2" transformers
+pip install "vllm==0.10.2"
 ```
 
 ### Run
