@@ -1,9 +1,10 @@
 import os
 import shutil
 import atexit
+import importlib.util
 
 # --- Paths ---
-orig_path = "/mnt/localssd/.envs/vllm_chunk_ind_rag/lib/python3.12/site-packages/vllm/v1/worker/gpu_model_runner.py"
+orig_path = importlib.util.find_spec("vllm.v1.worker.gpu_model_runner").origin
 backup_path = "./gpu_model_runner.py"
 patched_path = "./patch_gpu_model_runner.py"
 
