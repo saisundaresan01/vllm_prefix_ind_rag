@@ -707,13 +707,16 @@ def process_inputs_our(
         trace_headers=trace_headers,
     )
 
+# TODO: change to required pad_token_id or mask pad tokens in attention
 def get_pad_token_id_our(self,
                     lora_request: Optional[LoRARequest] = None
                 ) -> Optional[int]:
     if self.tokenizer is None:
-        logger.warning("Using None for PAD token id because tokenizer "
+        logger.warning("Using None for BOS token id because tokenizer "
                         "is not initialized")
         return None
+
+    return self.tokenizer.get_lora_tokenizer(lora_request).bos_token_id
 
 def pad_chunks_our(self, block_size: int, pad_token_id: int, chunks: list[list[int]], chunk_recompute_flags: list[int]) -> tuple[list[list[int]], list[int]]:
     """
