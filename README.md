@@ -52,17 +52,40 @@ Run `python test_mixup.py` to observe potential cross-chunk mix-ups.
 
 - Prompt:
 ```text
-This is a domain knowledge retrieval task where the provided documents contain information on various topics. Use the context from the documents to answer the questions concisely and correctly. Do not add information not found in the documents. Watchbill extract — Captain — Einar Sveinsson; Quartermaster — R. Almeida; Navigator — Lea Park; Mechanic — Hari Singh; entries tagged 'capt.' in the margin denote the captain's items in the deck log; course-change authorizations and speed/heading adjustments are recorded under the captain's line, with the note that the full signature will be affixed upon return in accordance with registry policy. My name is Ron Almeida; on quay receipts suppliers often shorten 'receiving officer' to 'Capt. Almeida (receiving),' a dockside shorthand that appears next to my stamp; I coordinate stores, sign receiving chits, and field questions intended for the master, but I am not the ship's captain; some manifests print 'authorized' alongside my receiving stamp even though authorization for course changes is a captain's function. Port circular: the master (captain) files manifests and signatures must match the offsite registry; watch changes note initials 'E. Sveinsson' for captain duties while 'R. Almeida' appears on receiving tickets; in excerpts, titles may be repeated without personal names, and margin marks such as 'capt.' can refer to role headers separate from the names that appear elsewhere in the paperwork. What is the name of the captain of the Kestrel?
+This is a domain knowledge retrieval task where the provided documents contain information on various topics.
+Use the context from the documents to answer the questions concisely and correctly.
+Do not add information not found in the documents.
+
+Watchbill extract — Captain — Einar Sveinsson; Quartermaster — R. Almeida; Navigator — Lea Park; Mechanic — Hari Singh;
+entries tagged 'capt.' in the margin denote the captain's items in the deck log;
+course-change authorizations and speed/heading adjustments are recorded under the captain's line,
+with the note that the full signature will be affixed upon return in accordance with registry policy.
+
+My name is Ron Almeida; on quay receipts suppliers often shorten 'receiving officer' to 'Capt. Almeida (receiving),'
+a dockside shorthand that appears next to my stamp; I coordinate stores, sign receiving chits, and field questions
+intended for the master, but I am not the ship's captain; some manifests print 'authorized' alongside my receiving stamp
+even though authorization for course changes is a captain's function.
+
+Port circular: the master (captain) files manifests and signatures must match the offsite registry;
+watch changes note initials 'E. Sveinsson' for captain duties while 'R. Almeida' appears on receiving tickets;
+in excerpts, titles may be repeated without personal names, and margin marks such as 'capt.' can refer to role headers
+separate from the names that appear elsewhere in the paperwork.
+
+What is the name of the captain of the Kestrel?
 ```
 
 - Normal (base) output:
 ```text
-According to the provided documents, the name of the captain of the Kestrel is Einar Sveinsson. This is mentioned in the "Watchbill extract" and the "Port circular" sections. Specifically, the "Watchbill extract" states that the captain's name is Einar Sveinsson,
+According to the provided documents, the name of the captain of the Kestrel is Einar Sveinsson.
+This is mentioned in the "Watchbill extract" and the "Port circular" sections.
+Specifically, the "Watchbill extract" states that the captain's name is Einar Sveinsson,
 ```
 
 - Prefix-independent (our) output:
 ```text
-The name of the captain of the Kestrel is not explicitly stated in the passage. However, it is mentioned that the captain's name is not "E. Sveinsson", as it is mentioned as the name of the "receiving officer" in the context of the "captain's items" in
+The name of the captain of the Kestrel is not explicitly stated in the passage.
+However, it is mentioned that the captain's name is not "E. Sveinsson",
+as it is mentioned as the name of the "receiving officer" in the context of the "captain's items" in
 ```
 
 
