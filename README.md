@@ -78,14 +78,14 @@ What is the name of the captain of the Kestrel?
 ```text
 According to the provided documents, the name of the captain of the Kestrel is Einar Sveinsson.
 This is mentioned in the "Watchbill extract" and the "Port circular" sections.
-Specifically, the "Watchbill extract" states that the captain's name is Einar Sveinsson,
+Specifically, the "Watchbill extract" states that the captain's name is Einar Sveinsson, ...
 ```
 
 - Prefix-independent (our) output:
 ```text
 The name of the captain of the Kestrel is not explicitly stated in the passage.
 However, it is mentioned that the captain's name is not "E. Sveinsson",
-as it is mentioned as the name of the "receiving officer" in the context of the "captain's items" in
+as it is mentioned as the name of the "receiving officer" in the context of the "captain's items" in ...
 ```
 
 
