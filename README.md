@@ -11,7 +11,7 @@ Initialization (once):
   [Mother Prompt, Doc 2]          ──► Cache(D2)
   [Mother Prompt, Doc 3]          ──► Cache(D3)
 
-Subsequent prompts reuse cached docs without re-encoding:
+Subsequent prompts reuse cached docs KV cache:
   Prompt A: [P] + {D1, D3} + [Q_A]  ──► reuse Cache(P, D1, D3)
   Prompt B: [P] + {D2} + [Q_B]      ──► reuse Cache(P, D2)
 
@@ -20,7 +20,7 @@ Chunk sequence for rope positions (example): [P, D1, D2, D3, Q] → [0, 1, 1, 1,
   - 1 → document chunks (each placed right after the mother prompt)
   - 2 → question chunk (placed right after the longest document chunk)
 
-Compared to regular prefix caching, where changing prefixes/order often invalidates caches and forces re-compute, this approach keeps document chunks reusable across prompts. See `test.py`: indices warm caches for docs (empty questions) and the final prompt reuses them with a question.
+Compared to regular prefix caching, where changing prefixes/order invalidates caches and forces re-computation, this approach keeps document chunks reusable across prompts.
 ```
 
 ### Install
