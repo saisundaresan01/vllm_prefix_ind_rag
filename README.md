@@ -40,37 +40,13 @@ python test.py
 - `monkey_patch_vllm.py` and `patch_gpu_model_runner.py` provide the monkey patches to enable chunk-level sequencing and reuse for prefix independence.
 
 ### Mix-up example (prefix confusion)
-Run `python test_mixup.py` to observe potential cross-chunk mix-ups.
+Run `python test_mixup.py` to observe cross-chunk mix-ups.
 
 - Toggle mode by setting `run_type` at the top of `test_mixup.py`:
   - `run_type = "base"` → regular run (no prefix-independence)
   - `run_type = "our"` → prefix-independent run (document caches reused)
 
-- Prompt:
-```text
-This is a domain knowledge retrieval task where the provided documents contain information on various topics.
-Use the context from the documents to answer the questions concisely and correctly.
-Do not add information not found in the documents.
-
-Watchbill extract — Captain — Einar Sveinsson; Quartermaster — R. Almeida; Navigator — Lea Park; Mechanic — Hari Singh;
-entries tagged 'capt.' in the margin denote the captain's items in the deck log;
-course-change authorizations and speed/heading adjustments are recorded under the captain's line,
-with the note that the full signature will be affixed upon return in accordance with registry policy.
-
-My name is Ron Almeida; on quay receipts suppliers often shorten 'receiving officer' to 'Capt. Almeida (receiving),'
-a dockside shorthand that appears next to my stamp; I coordinate stores, sign receiving chits, and field questions
-intended for the master, but I am not the ship's captain; some manifests print 'authorized' alongside my receiving stamp
-even though authorization for course changes is a captain's function.
-
-Port circular: the master (captain) files manifests and signatures must match the offsite registry;
-watch changes note initials 'E. Sveinsson' for captain duties while 'R. Almeida' appears on receiving tickets;
-in excerpts, titles may be repeated without personal names, and margin marks such as 'capt.' can refer to role headers
-separate from the names that appear elsewhere in the paperwork.
-
-What is the name of the captain of the Kestrel?
-```
-
-### Generation Results
+#### Generation Results
 
 - Example 1 (Captain of the Kestrel)
   - Prompt:
