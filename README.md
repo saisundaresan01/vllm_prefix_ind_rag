@@ -134,6 +134,6 @@ Run `python test_mixup.py` to observe cross-chunk mix-ups.
 Notes:
 - In Example 1, the three single-paragraph documents are stacked and heavily overlap role/title tokens (captain, watchbill, initials). The question asks for the captain’s name of the Kestrel. Base extracts the correct name and title, while our method incorrectly fuse names and titles (e.g., "E. Sveinsson" is considered to be "receiving officer").
 - In Example 2, placing "Runway Access Bridge" tokens adjacent to the viaduct's "07:00–11:00" window under our method induces cross-chunk mixup that flips the answer.
-- In Example 3, award language fragments (“the lowest responsive and responsible bidder is …”) appear near the ACW name across chunk boundaries; the compliance text disqualifies ACW later. Under our method, the model can get confused and assign ACW to the award phrase.
+- In Example 3, award language fragments (“the lowest responsive and responsible bidder is …”) appear near the ACW name across chunk boundaries; the compliance text disqualifies ACW later. Under our method, the model can get confused and assigns ACW to the award phrase.
 
 
